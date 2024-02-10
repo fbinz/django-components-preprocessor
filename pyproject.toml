@@ -13,4 +13,4 @@ dependencies = [
 ]
 
 [project.urls]
-Home = "https://ich.binz.dev"
+Home = "https://github.com/fbinz/django-components-preprocessor"
