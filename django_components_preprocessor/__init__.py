@@ -1,6 +1,6 @@
 """A preprocessor for Django templates that replaces custom HTML tags with component tags."""
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 
 def with_components_preprocessor(*loaders):
