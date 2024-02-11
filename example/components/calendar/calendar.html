@@ -1,6 +1,7 @@
 <div class="calendar-component">
   <div class="header">{% slot "header" %}Calendar header{% endslot %}</div>
   <div class="body">
-    {% slot "body" %}Today's date is <span>{{ date }}</span>{% endslot %}
+    {% slot "body" default %} Today's date is <span>{{ date }}</span>
+    {% endslot %}
   </div>
 </div>

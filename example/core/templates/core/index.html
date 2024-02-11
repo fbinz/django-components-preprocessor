@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +10,10 @@
 <body>
   <Calendar date="2015-06-19/>" only />
   <Calendar date="2015-06-19" />
-
-  <Calendar date="2020-06/19">
-    {% fill "header" %}Huhu{% endfill %}
-    {% fill "body" %}Can you believe it's already <span>{{ date }}</span>??{% endfill %}
+  <Calendar 
+    date="2020-06/19"
+  >
+    <div>another child</div>
   </Calendar>
 
   {% component_js_dependencies %}
