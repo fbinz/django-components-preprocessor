@@ -16,8 +16,8 @@ class Loader(BaseLoader):
 
         # Prepare regular expressions for replacing tags
         self.component_names = "|".join(registry.all().keys())
-        self.self_closing_tag_re = re.compile(f"<({self.component_names})(.*)/>")
-        self.opening_tag_re = re.compile(f"<({self.component_names})(.*)>")
+        self.self_closing_tag_re = re.compile(f"<({self.component_names})([^>]*)/>")
+        self.opening_tag_re = re.compile(f"<({self.component_names})([^>]*)>")
         self.closing_tag_re = re.compile(f"</({self.component_names})\s*>")
 
         super().__init__(engine)
