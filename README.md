@@ -66,6 +66,20 @@ TEMPLATES = [
 ]
 ```
 
+## How it works
+
+Your templates will be preprocessed before being passed to the regular django template engine.
+The preprocessor will replace custom tags (i.e. `<calendar />`) with the regular django-component tags
+(i.e. `{% component "calendar" }`).
+The tags are matched by name and are case-sensitive.
+
+Currently, custom tags are found using regular expressions, which is obviously a bit whacky.
+It does however work for most cases, and is a lot more readable than the regular django-component tags.
+A more robust solution would be to use a proper HTML parser, but that's a bit overkill at this point in time.
+
+If, due to the limitations of the regular expressions, you find that the preprocessor doesn't work for your use case,
+you can always use the regular django-component tags as you normally would.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
