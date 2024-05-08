@@ -26,17 +26,17 @@ class Loader(BaseLoader):
     def replace_self_closing_tag(match):
         tag = match.group(1)
         args = match.group(2).replace("\n", " ")
-        return f'{{% component "{tag}"{args} %}}'
+        return f'{{% component "{tag}"{args} %}}{{% endcomponent %}}'
 
     @staticmethod
     def replace_opening_tag(match):
         tag = match.group(1)
         args = match.group(2).replace("\n", " ")
-        return f'{{% component_block "{tag}"{args} %}}'
+        return f'{{% component "{tag}"{args} %}}'
 
     @staticmethod
     def replace_closing_tag(match):
-        return "{% endcomponent_block %}"
+        return "{% endcomponent %}"
 
     def get_contents(self, origin):
         contents = self.loader_get_contents(origin)
