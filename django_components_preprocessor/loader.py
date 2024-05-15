@@ -15,10 +15,10 @@ class Loader(BaseLoader):
         self.loader.get_contents = self.get_contents
 
         # Prepare regular expressions for replacing tags
-        self.component_names = "|".join(registry.all().keys())
-        self.self_closing_tag_re = re.compile(f"<({self.component_names})([^>]*)/>")
-        self.opening_tag_re = re.compile(f"<({self.component_names})([^>]*)>")
-        self.closing_tag_re = re.compile(f"</({self.component_names})\s*>")
+        self.tags = "|".join(registry.all().keys())
+        self.self_closing_tag_re = re.compile(f"<({self.tags})([^>]*)/>")
+        self.opening_tag_re = re.compile(rf"<({self.tags})(\.(\w+))?([^>]*)>")
+        self.closing_tag_re = re.compile(rf"</({self.tags})(\.(\w+))?\s*>")
 
         super().__init__(engine)
 
@@ -31,11 +31,20 @@ class Loader(BaseLoader):
     @staticmethod
     def replace_opening_tag(match):
         tag = match.group(1)
-        args = match.group(2).replace("\n", " ")
+        slot = match.group(3)
+        args = match.group(4).replace("\n", " ")
+
+        if slot:
+            assert not args, "Slots cannot have attributes"
+            return f'{{% fill "{slot}" %}}' 
+
         return f'{{% component "{tag}"{args} %}}'
 
     @staticmethod
     def replace_closing_tag(match):
+        slot = match.group(3)
+        if slot:
+            return f"{{% endfill %}}"
         return "{% endcomponent %}"
 
     def get_contents(self, origin):

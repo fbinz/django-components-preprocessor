@@ -10,9 +10,9 @@ This project allows you to use regular HTML tags for your django-component compo
 
 ```
 {% component_block "calendar" attr="value" %}
-  {% component_block "header" %}
+  {% fill "header" %}
     Custom header
-  {% endcomponent_block %}
+  {% endfill %}
 {% encomponent_block %}
 ```
 
@@ -20,9 +20,9 @@ This project allows you to use regular HTML tags for your django-component compo
 
 ```
 <calendar attr="value">
-  <header>
+  <calendar.header>
     Custom header
-  </header>
+  </calendar.header>
 </calendar>
 ```
 
@@ -71,6 +71,8 @@ TEMPLATES = [
 Your templates will be preprocessed before being passed to the regular django template engine.
 The preprocessor will replace custom tags (i.e. `<calendar />`) with the regular django-component tags
 (i.e. `{% component "calendar" }`).
+Additionally, custom tags with dots (i.e. `<calendar.header />`) will be replaced with the regular django-component tags
+(i.e. `{% fill "header" %}`), where the slot name is the last part of the tag name split at the dot.
 The tags are matched by name and are case-sensitive.
 
 Currently, custom tags are found using regular expressions, which is obviously a bit whacky.
